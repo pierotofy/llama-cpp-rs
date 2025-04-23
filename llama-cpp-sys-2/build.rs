@@ -416,8 +416,10 @@ fn main() {
         if !cfg!(feature = "cuda-no-vmm") {
             println!("cargo:rustc-link-lib=cuda");
         }
-
-        println!("cargo:rustc-link-lib=static=culibos");
+        
+        if !matches!(target_os, TargetOs::Windows(_)){
+            println!("cargo:rustc-link-lib=static=culibos");
+        }
     }
 
     // Link libraries
